@@ -24,12 +24,26 @@ jobs:
         with:
           gradle-version: '8.2'
 
-      - name: Build Debug APK
-        run: gradle assembleDebug
+      - name: Decode keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > app/sph-helpdesk.keystore
+
+      - name: Build Release APK
+        run: |
+          gradle assembleRelease \
+            -Pandroid.injected.signing.store.file=$(pwd)/app/sph-helpdesk.keystore \
+            -Pandroid.injected.signing.store.password="${{ secrets.STORE_PASSWORD }}" \
+            -Pandroid.injected.signing.key.alias=sph-helpdesk \
+            -Pandroid.injected.signing.key.password="${{ secrets.KEY_PASSWORD }}"
+
+      - name: Rename APK
+        run: |
+          mkdir -p output
+          cp app/build/outputs/apk/release/*.apk output/SPH-HelpDesk.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: SPH-HelpDesk-APK
-          path: app/build/outputs/apk/debug/*.apk
-          retention-days: 30
+          name: SPH-HelpDesk-Release-APK
+          path: output/SPH-HelpDesk.apk
+          retention-days: 90
