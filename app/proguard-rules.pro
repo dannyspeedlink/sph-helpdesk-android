@@ -1,0 +1,3 @@
+-keep class ng.edu.uniport.sph.helpdesk.** { *; }
+-keep class androidx.webkit.** { *; }
+-dontwarn androidx.webkit.**
