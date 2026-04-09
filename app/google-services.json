@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "816821654901",
+    "project_id": "sph-helpdesk",
+    "storage_bucket": "sph-helpdesk.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816821654901:android:471e46c6e4d5a47946af3c",
+        "android_client_info": {
+          "package_name": "ng.edu.uniport.sph.helpdesk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMW2RVCOpMolX0-kUUYdY8czAmagMwYS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

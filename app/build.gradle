@@ -1,0 +1,46 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    namespace 'ng.edu.uniport.sph.helpdesk'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "ng.edu.uniport.sph.helpdesk"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "SPH-HelpDesk-v${defaultConfig.versionName}.apk"
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-splashscreen:1.0.1'
+    implementation 'androidx.webkit:webkit:1.9.0'
+    implementation platform('com.google.firebase:firebase-bom:32.7.0')
+    implementation 'com.google.firebase:firebase-messaging'
+}
