@@ -36,7 +36,7 @@ jobs:
             -Pandroid.injected.signing.store.file=$(pwd)/app/sph-helpdesk.keystore \
             -Pandroid.injected.signing.store.password="${{ secrets.STORE_PASSWORD }}" \
             -Pandroid.injected.signing.key.alias=sph-helpdesk \
-            -Pandroid.injected.signing.key.password="${{ secrets.KEY_PASSWORD }}"
+            -Pandroid.injected.signing.key.password="${{ secrets.STORE_PASSWORD }}"
 
       - name: Rename APK
         run: |
