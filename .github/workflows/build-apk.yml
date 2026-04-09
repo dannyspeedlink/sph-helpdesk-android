@@ -26,7 +26,7 @@ jobs:
 
       - name: Decode keystore
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > app/sph-helpdesk.keystore
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | tr -d ' \n' | base64 -d > app/sph-helpdesk.keystore
 
       - name: Build Release APK
         run: |
