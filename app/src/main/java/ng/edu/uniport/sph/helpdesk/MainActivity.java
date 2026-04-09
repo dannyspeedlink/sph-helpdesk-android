@@ -120,6 +120,21 @@ public class MainActivity extends Activity {
             public void onPageFinished(WebView view, String url) {
                 progressBar.setVisibility(View.GONE);
                 CookieManager.getInstance().flush();
+
+                // Inject FCM token registration on every page load
+                // This ensures it fires after login when session is active
+                String fcmToken = getSharedPreferences("sph_prefs", MODE_PRIVATE)
+                    .getString("fcm_token", null);
+                if (fcmToken != null && url.contains("helpdesk.uphsph.edu.ng")) {
+                    String js = "javascript:(function(){"
+                        + "fetch('/fcm_register.php',{"
+                        + "method:'POST',"
+                        + "headers:{'Content-Type':'application/json'},"
+                        + "body:JSON.stringify({fcm_token:'" + fcmToken + "',device_info:'Android App'})"
+                        + "}).catch(function(){});"
+                        + "})();";
+                    view.loadUrl(js);
+                }
             }
 
             @Override
