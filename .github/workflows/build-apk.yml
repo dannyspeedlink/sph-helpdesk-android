@@ -3,7 +3,7 @@ name: Build SPH HelpDesk APK
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:
+  workflow_dispatch:  # Allow manual trigger from GitHub
 
 jobs:
   build:
@@ -19,14 +19,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: '8.2'
+      - name: Make gradlew executable
+        run: chmod +x gradlew
 
       - name: Build Debug APK
-        run: gradle assembleDebug
-        working-directory: .
+        run: ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
@@ -34,3 +31,9 @@ jobs:
           name: SPH-HelpDesk-APK
           path: app/build/outputs/apk/debug/*.apk
           retention-days: 30
+
+      - name: Upload APK to server
+        if: success()
+        run: |
+          echo "APK built successfully"
+          ls -lh app/build/outputs/apk/debug/
