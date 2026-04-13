@@ -1,4 +1,4 @@
-name: Build SPH HelpDesk APK
+name: Build SPH HelpDesk APK & AAB
 
 on:
   push:
@@ -38,14 +38,30 @@ jobs:
             -Pandroid.injected.signing.key.alias=sph-helpdesk \
             -Pandroid.injected.signing.key.password="${{ secrets.STORE_PASSWORD }}"
 
-      - name: Rename APK
+      - name: Build Release AAB (for Play Store)
+        run: |
+          gradle bundleRelease \
+            -Pandroid.injected.signing.store.file=$(pwd)/app/sph-helpdesk.keystore \
+            -Pandroid.injected.signing.store.password="${{ secrets.STORE_PASSWORD }}" \
+            -Pandroid.injected.signing.key.alias=sph-helpdesk \
+            -Pandroid.injected.signing.key.password="${{ secrets.STORE_PASSWORD }}"
+
+      - name: Prepare outputs
         run: |
           mkdir -p output
           cp app/build/outputs/apk/release/*.apk output/SPH-HelpDesk.apk
+          cp app/build/outputs/bundle/release/*.aab output/SPH-HelpDesk.aab
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: SPH-HelpDesk-Release-APK
+          name: SPH-HelpDesk-APK
           path: output/SPH-HelpDesk.apk
+          retention-days: 90
+
+      - name: Upload AAB (Play Store)
+        uses: actions/upload-artifact@v4
+        with:
+          name: SPH-HelpDesk-AAB
+          path: output/SPH-HelpDesk.aab
           retention-days: 90
