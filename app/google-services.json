@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:816821654901:android:bf41a0e5dccb8bfb46af3c",
+        "android_client_info": {
+          "package_name": "com.sphhelpdesk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMW2RVCOpMolX0-kUUYdY8czAmagMwYS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:816821654901:android:471e46c6e4d5a47946af3c",
         "android_client_info": {
           "package_name": "ng.edu.uniport.sph.helpdesk"

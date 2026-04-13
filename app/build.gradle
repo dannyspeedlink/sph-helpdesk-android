@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'ng.edu.uniport.sph.helpdesk'
+    namespace 'com.sphhelpdesk'
     compileSdk 34
 
     defaultConfig {
-        applicationId "ng.edu.uniport.sph.helpdesk"
+        applicationId "com.sphhelpdesk"
         minSdk 21
         targetSdk 34
         versionCode 1
@@ -21,6 +21,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
+            applicationIdSuffix ".debug"
             debuggable true
         }
     }
